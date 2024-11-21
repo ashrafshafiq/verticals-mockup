@@ -1,0 +1,32 @@
+.
+├── App.css
+├── App.jsx
+├── App.test.js
+├── components
+│   ├── Confirmation.jsx
+│   ├── DonationForm.jsx
+│   ├── DonationPage.jsx
+│   ├── IntegrationPopup.jsx
+│   ├── Layout.jsx
+│   ├── PaymentForm.jsx
+│   ├── PaymentMethodLogin.jsx
+│   ├── PaymentProcessing.jsx
+│   ├── TrackingPortal.jsx
+│   └── admin
+│       ├── AdminDashboard.jsx
+│       ├── DonationManagement.jsx
+│       ├── ProjectOverview.jsx
+│       ├── TransactionLogs.jsx
+│       └── UserFeedback.jsx
+├── index.css
+├── index.js
+├── logo.svg
+├── reportWebVitals.js
+├── services
+│   └── blockchainService.js
+├── setupTests.js
+├── styles
+│   └── theme.js
+└── tree.txt
+
+5 directories, 25 files
