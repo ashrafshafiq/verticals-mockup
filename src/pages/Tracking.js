@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Container, Grid, Typography, Stepper, Step, StepLabel, Box } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import HourglassTopIcon from "@mui/icons-material/HourglassTop";
+import { Container, Typography, Box } from "@mui/material";
 import Notes from "../components/Notes";
 import PieChartSection from "../components/PieChartSection";
+import TrackingBar from "../components/TrackingBar";
 import donationSteps from "../data/donationSteps.json";
 
 const COLORS = ["#A7D7F9", "#B5E3C8", "#FFD6A5", "#FFBDBD"];
@@ -15,7 +14,7 @@ function Tracking() {
   const { trackingID } = location.state || {};
   const [currentStage, setCurrentStage] = useState(0);
   const [categoryData, setCategoryData] = useState({});
-  const donationAmount = 100;
+  const donationAmount = 100; // Example fixed donation amount
 
   // Generate cumulative data for Pie Chart
   useEffect(() => {
@@ -35,6 +34,7 @@ function Tracking() {
     generateCategoryData();
   }, [currentStage]);
 
+  // Simulates stage progression every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStage((prev) => (prev < donationSteps.length - 1 ? prev + 1 : prev));
@@ -42,6 +42,7 @@ function Tracking() {
     return () => clearInterval(interval);
   }, []);
 
+  // Prepare data for Pie Chart
   const pieChartData = Object.entries(categoryData).map(([name, value]) => ({
     name,
     value: (value / 100) * donationAmount,
@@ -61,59 +62,43 @@ function Tracking() {
         Tracking Your Donation
       </Typography>
       <Typography variant="body1" align="center" sx={{ marginBottom: 2, color: "text.secondary" }}>
-        Tracking ID: <b>{trackingID}</b>
+        Tracking ID: <b>{trackingID || "N/A"}</b>
       </Typography>
 
-      {/* Stepper */}
+      {/* Tracking Bar */}
       <Box
         sx={{
-          marginBottom: 4,
+          width: "100%",
           overflowX: "auto",
-          paddingX: 2,
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: 2,
         }}
       >
-        <Stepper alternativeLabel activeStep={currentStage}>
-          {donationSteps.map((step, index) => (
-            <Step key={index} completed={index < currentStage}>
-              <StepLabel
-                icon={
-                  index < currentStage || (index === currentStage && index === donationSteps.length - 1) ? (
-                    <CheckCircleIcon color="success" />
-                  ) : (
-                    <HourglassTopIcon color="warning" />
-                  )
-                }
-              >
-                {step.stage}
-              </StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+        <TrackingBar steps={donationSteps} currentStage={currentStage} />
       </Box>
 
-      {/* Notes and Pie Chart */}
-      <Grid container spacing={4} sx={{ alignItems: "flex-start" }}>
-        <Grid item xs={12} sm={6}>
-          <Notes
-            steps={donationSteps.slice(0, currentStage + 1)}
-            currentStage={currentStage}
-            colors={COLORS}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Box
-            sx={{
-              width: "100%",
-              height: { xs: 250, sm: 300 }, // Adjust height for mobile and larger screens
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <PieChartSection data={pieChartData} colors={COLORS} />
-          </Box>
-        </Grid>
-      </Grid>
+      {/* Pie Chart */}
+      <Box
+        sx={{
+          width: "100%",
+          height: { xs: 250, sm: 300 },
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <PieChartSection data={pieChartData} colors={COLORS} />
+      </Box>
+
+      {/* Notes */}
+      <Box sx={{ width: "100%" }}>
+        <Notes
+          steps={donationSteps.slice(0, currentStage + 1)}
+          currentStage={currentStage}
+          colors={COLORS}
+        />
+      </Box>
     </Container>
   );
 }
