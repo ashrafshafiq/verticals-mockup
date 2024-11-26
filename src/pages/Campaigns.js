@@ -50,13 +50,22 @@ function Campaigns() {
   return (
     <Container>
       {/* Page Header */}
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{
+          fontSize: { xs: "1.8rem", sm: "2.4rem" },
+          marginY: { xs: 2, sm: 4 },
+        }}
+      >
         Our Campaigns
       </Typography>
-      <Grid container spacing={4}>
+
+      {/* Campaign Cards */}
+      <Grid container spacing={2}>
         {campaigns.map((campaign, index) => (
           <Grid item xs={12} sm={6} md={4} key={campaign.id}>
-            {/* Campaign Card */}
             <Card
               sx={{
                 transition: "transform 0.2s ease-in-out, box-shadow 0.2s",
@@ -69,13 +78,13 @@ function Campaigns() {
               {/* Campaign Header */}
               <Box
                 sx={{
-                  height: "140px",
+                  height: { xs: "100px", sm: "140px" },
                   backgroundColor: campaign.bgColor,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "white",
-                  fontSize: "1.5rem",
+                  fontSize: { xs: "1.2rem", sm: "1.5rem" },
                   fontWeight: "bold",
                   textTransform: "uppercase",
                 }}
@@ -85,13 +94,32 @@ function Campaigns() {
 
               {/* Campaign Content */}
               <CardContent>
-                <Typography variant="body2" color="textSecondary" gutterBottom>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  gutterBottom
+                  sx={{
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                  }}
+                >
                   {campaign.description}
                 </Typography>
-                <Typography variant="subtitle1" color="primary">
+                <Typography
+                  variant="subtitle1"
+                  color="primary"
+                  sx={{
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                  }}
+                >
                   Goal: {campaign.goal}
                 </Typography>
-                <Typography variant="subtitle2" color="textSecondary">
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  sx={{
+                    fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                  }}
+                >
                   Raised: {campaign.raised}
                 </Typography>
 
@@ -101,7 +129,7 @@ function Campaigns() {
                     variant="determinate"
                     value={campaign.progress}
                     sx={{
-                      height: 10,
+                      height: 8,
                       borderRadius: 5,
                       "& .MuiLinearProgress-bar": {
                         backgroundColor:
@@ -112,7 +140,10 @@ function Campaigns() {
                   <Typography
                     variant="body2"
                     align="right"
-                    sx={{ marginTop: "4px" }}
+                    sx={{
+                      fontSize: { xs: "0.7rem", sm: "0.9rem" },
+                      marginTop: "4px",
+                    }}
                   >
                     {campaign.progress}%
                   </Typography>
@@ -125,6 +156,7 @@ function Campaigns() {
                   fullWidth
                   sx={{
                     borderRadius: 2,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
                   }}
                   onClick={() =>
                     navigate(`/donate/${campaign.id}`, {
