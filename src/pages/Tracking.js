@@ -5,51 +5,33 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import Notes from "../components/Notes";
 import PieChartSection from "../components/PieChartSection";
-import ProgressBar from "../components/ProgressBar";
-import donationSteps from "../data/donationSteps.json"; // Example steps
+import donationSteps from "../data/donationSteps.json";
 
 const COLORS = ["#A7D7F9", "#B5E3C8", "#FFD6A5", "#FFBDBD"];
-
-// Categories for the Pie Chart
 const CATEGORIES = ["Materials", "Logistics", "Admin Fees", "Miscellaneous"];
 
 function Tracking() {
   const location = useLocation();
-  const { trackingID } = location.state || {}; // Extract trackingID from state
+  const { trackingID } = location.state || {};
   const [currentStage, setCurrentStage] = useState(0);
   const [categoryData, setCategoryData] = useState({});
+  const donationAmount = 100;
 
-  const donationAmount = 100; // Example fixed donation amount
-
-  // Generate random percentages and calculate cumulative category data
+  // Generate cumulative data for Pie Chart
   useEffect(() => {
     const generateCategoryData = () => {
-      const cumulativeData = {}; // To store cumulative percentages
-      let stageData = donationSteps.slice(0, currentStage + 1).map((step) => {
-        // Assign random percentages for categories
+      const cumulativeData = {};
+      donationSteps.slice(0, currentStage + 1).forEach((step) => {
         const randomPercentages = CATEGORIES.map(() => Math.random());
         const sum = randomPercentages.reduce((acc, val) => acc + val, 0);
         const normalizedPercentages = randomPercentages.map((val) => (val / sum) * 100);
-
-        // Map the percentages to categories
-        const mappedCategories = CATEGORIES.map((category, index) => ({
-          category,
-          value: normalizedPercentages[index],
-        }));
-
-        // Aggregate cumulative percentages per category
-        mappedCategories.forEach(({ category, value }) => {
+        CATEGORIES.forEach((category, index) => {
           if (!cumulativeData[category]) cumulativeData[category] = 0;
-          cumulativeData[category] += value;
+          cumulativeData[category] += normalizedPercentages[index];
         });
-
-        return { ...step, percentages: mappedCategories };
       });
-
-      setCategoryData(cumulativeData); // Update state with cumulative data
-      return stageData;
+      setCategoryData(cumulativeData);
     };
-
     generateCategoryData();
   }, [currentStage]);
 
@@ -60,27 +42,36 @@ function Tracking() {
     return () => clearInterval(interval);
   }, []);
 
-  // Prepare Pie Chart Data
   const pieChartData = Object.entries(categoryData).map(([name, value]) => ({
     name,
-    value: (value / 100) * donationAmount, // Convert percentage to donation amount
+    value: (value / 100) * donationAmount,
   }));
 
   return (
-    <Container sx={{ marginTop: 4 }}>
-      {/* Tracking ID Display */}
+    <Container
+      sx={{
+        marginTop: 4,
+        display: "flex",
+        flexDirection: "column",
+        gap: 4,
+      }}
+    >
+      {/* Header */}
       <Typography variant="h5" align="center" gutterBottom>
         Tracking Your Donation
       </Typography>
-      <Typography variant="body1" align="center" sx={{ marginBottom: 3, color: "text.secondary" }}>
+      <Typography variant="body1" align="center" sx={{ marginBottom: 2, color: "text.secondary" }}>
         Tracking ID: <b>{trackingID}</b>
       </Typography>
 
-      {/* Progress Bar */}
-      <ProgressBar currentStage={currentStage} totalStages={donationSteps.length} />
-
       {/* Stepper */}
-      <Box sx={{ marginBottom: 5 }}>
+      <Box
+        sx={{
+          marginBottom: 4,
+          overflowX: "auto",
+          paddingX: 2,
+        }}
+      >
         <Stepper alternativeLabel activeStep={currentStage}>
           {donationSteps.map((step, index) => (
             <Step key={index} completed={index < currentStage}>
@@ -101,16 +92,24 @@ function Tracking() {
       </Box>
 
       {/* Notes and Pie Chart */}
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
+      <Grid container spacing={4} sx={{ alignItems: "flex-start" }}>
+        <Grid item xs={12} sm={6}>
           <Notes
-            steps={donationSteps.slice(0, currentStage + 1)} // Show steps up to current stage
+            steps={donationSteps.slice(0, currentStage + 1)}
             currentStage={currentStage}
             colors={COLORS}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Box sx={{ width: "100%", height: 300 }}>
+        <Grid item xs={12} sm={6}>
+          <Box
+            sx={{
+              width: "100%",
+              height: { xs: 250, sm: 300 }, // Adjust height for mobile and larger screens
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <PieChartSection data={pieChartData} colors={COLORS} />
           </Box>
         </Grid>
