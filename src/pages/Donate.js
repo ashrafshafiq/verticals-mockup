@@ -12,7 +12,6 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid"; // Import UUID for generating unique tracking IDs
 
-// Modal styling
 const modalStyle = {
   position: "absolute",
   top: "50%",
@@ -43,8 +42,8 @@ function Donate() {
   ];
 
   const handlePayment = (method) => {
-    if (!amount) {
-      alert("Please enter a donation amount.");
+    if (!amount || parseFloat(amount) <= 0) {
+      alert("Please enter a valid donation amount greater than $0.");
       return;
     }
     setSelectedMethod(method);
@@ -57,8 +56,8 @@ function Donate() {
     // Generate a unique tracking ID
     const trackingID = uuidv4();
 
-    // Navigate to the Tracking ID page with state
-    navigate("/tracking-id", {
+    // Navigate to the Tracking ID Assignment screen
+    navigate("/tracking-id/assigned", {
       state: {
         trackingID,
         amount,

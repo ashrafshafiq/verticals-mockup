@@ -1,56 +1,51 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Container, Typography, Button, Box } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function TrackingID() {
   const location = useLocation();
+  const { trackingID, amount, campaign, paymentMethod } = location.state || {};
+
   const navigate = useNavigate();
-  const { trackingID, amount, campaign } = location.state || {};
 
   if (!trackingID) {
     return (
-      <Container>
-        <Typography variant="h6" align="center">
-          No tracking ID found! Please make a donation first.
+      <Box sx={{ textAlign: "center", mt: 4 }}>
+        <Typography variant="h6" gutterBottom>
+          No Tracking ID Found
         </Typography>
-      </Container>
+        <Button variant="contained" color="primary" onClick={() => navigate("/donate")}>
+          Go to Donate
+        </Button>
+      </Box>
     );
   }
 
   return (
-    <Container sx={{ marginTop: 4 }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Your Donation Was Successful!
+    <Box sx={{ textAlign: "center", mt: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        Thank You for Your Donation!
       </Typography>
-      <Box sx={{ marginBottom: 3 }}>
-        <Typography variant="body1" align="center">
-          Thank you for your donation of <b>${amount}</b> to <b>{campaign}</b>.
-        </Typography>
-        <Typography variant="body2" align="center" sx={{ marginTop: 2 }}>
-          Use the tracking ID below to follow your donation’s progress:
-        </Typography>
-        <Typography
-          variant="h6"
-          align="center"
-          sx={{ marginTop: 2, fontWeight: "bold", color: "primary.main" }}
-        >
-          {trackingID}
-        </Typography>
-      </Box>
-      <Box sx={{ textAlign: "center" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() =>
-            navigate("/tracking", {
-              state: { trackingID },
-            })
-          }
-        >
-          Track My Donation
-        </Button>
-      </Box>
-    </Container>
+      <Typography variant="body1" sx={{ marginBottom: 2 }}>
+        Campaign: <b>{campaign}</b>
+      </Typography>
+      <Typography variant="body1" sx={{ marginBottom: 2 }}>
+        Donation Amount: <b>${amount}</b>
+      </Typography>
+      <Typography variant="body1" sx={{ marginBottom: 4 }}>
+        Payment Method: <b>{paymentMethod}</b>
+      </Typography>
+      <Typography variant="h6" sx={{ marginBottom: 4 }}>
+        Your Tracking ID is: <b>{trackingID}</b>
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => navigate("/tracking", { state: { trackingID } })}
+      >
+        Track Your Donation
+      </Button>
+    </Box>
   );
 }
 

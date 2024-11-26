@@ -1,17 +1,12 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, Container, Box } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
+import Navbar from "./Navbar";
 
 function Layout({ children }) {
   return (
     <>
-      {/* Header */}
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Shafiq and Co Cares
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      {/* Navbar */}
+      <Navbar />
 
       {/* Main Content */}
       <Container sx={{ marginY: 4 }}>{children}</Container>
