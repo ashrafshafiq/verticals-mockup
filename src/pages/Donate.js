@@ -10,6 +10,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid"; // Import UUID for generating unique tracking IDs
 
 // Modal styling
 const modalStyle = {
@@ -52,7 +53,19 @@ function Donate() {
 
   const confirmPayment = () => {
     setModalOpen(false);
-    navigate("/tracking", { state: { amount, paymentMethod: selectedMethod, campaign } });
+
+    // Generate a unique tracking ID
+    const trackingID = uuidv4();
+
+    // Navigate to the Tracking ID page with state
+    navigate("/tracking-id", {
+      state: {
+        trackingID,
+        amount,
+        paymentMethod: selectedMethod,
+        campaign,
+      },
+    });
   };
 
   return (

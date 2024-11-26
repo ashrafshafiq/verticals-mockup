@@ -1,0 +1,51 @@
+[
+    {
+      "stage": "Donation Received",
+      "description": "Your donation has been processed.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE1",
+      "image": "https://source.unsplash.com/100x100/?abstract,art"
+    },
+    {
+      "stage": "Blockchain Verified",
+      "description": "Your donation is now recorded on the blockchain.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE2",
+      "image": "https://source.unsplash.com/100x100/?technology,blockchain"
+    },
+    {
+      "stage": "Funds Allocated",
+      "description": "Funds allocated to purchasing materials for building the water well.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE3",
+      "image": "https://source.unsplash.com/100x100/?construction,tools"
+    },
+    {
+      "stage": "Logistics Funded",
+      "description": "Transportation for materials has been arranged and funded.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE4",
+      "image": "https://source.unsplash.com/100x100/?logistics,transport"
+    },
+    {
+      "stage": "Construction Started",
+      "description": "Construction of the water well has commenced in Amirah's village.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE5",
+      "image": "https://source.unsplash.com/100x100/?construction,building"
+    },
+    {
+      "stage": "Inspection Completed",
+      "description": "The water well has passed initial inspection for safety and functionality.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE6",
+      "image": "https://source.unsplash.com/100x100/?inspection,quality"
+    },
+    {
+      "stage": "Well Inaugurated",
+      "description": "The water well has been inaugurated, and the community now has access to clean water.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE7",
+      "image": "https://source.unsplash.com/100x100/?community,celebration"
+    },
+    {
+      "stage": "Impact Report Shared",
+      "description": "The impact report has been shared with donors, showing how their contributions changed lives.",
+      "transactionLink": "https://solscan.io/tx/EXAMPLE8",
+      "image": "https://source.unsplash.com/100x100/?report,success"
+    }
+  ]
+  

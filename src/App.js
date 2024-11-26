@@ -1,20 +1,18 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-import Campaigns from "./pages/Campaigns";
-import Donate from "./pages/Donate";
+import TrackingID from "./pages/TrackingID";
 import Tracking from "./pages/Tracking";
+import Donate from "./pages/Donate";
+import Campaigns from "./pages/Campaigns";
 
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Campaigns />} />
-          <Route path="/donate/:id" element={<Donate />} />
-          <Route path="/tracking" element={<Tracking />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/" element={<Campaigns />} />
+        <Route path="/donate/:id" element={<Donate />} /> {/* Dynamic route */}
+        <Route path="/tracking-id" element={<TrackingID />} />
+        <Route path="/tracking" element={<Tracking />} />
+      </Routes>
     </Router>
   );
 }
