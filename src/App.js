@@ -1,5 +1,6 @@
+// App.js
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Campaigns from "./pages/Campaigns";
 import Donate from "./pages/Donate";
@@ -9,10 +10,10 @@ import TrackingSearch from "./pages/TrackingSearch";
 
 function App() {
   return (
-    <Router basename="/verticals-mockup"> {/* Ensure proper basename for GitHub Pages */}
+    <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<Navigate to="/campaigns" />} /> {/* Redirect to Campaigns */}
+          <Route path="/" element={<Navigate to="/campaigns" />} />
           <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/donate/:id" element={<Donate />} />
           <Route path="/tracking" element={<Tracking />} />
