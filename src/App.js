@@ -1,6 +1,6 @@
 // App.js
 import React from "react";
-import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Campaigns from "./pages/Campaigns";
 import Donate from "./pages/Donate";
@@ -10,7 +10,8 @@ import TrackingSearch from "./pages/TrackingSearch";
 
 function App() {
   return (
-    <Router>
+    // Use BrowserRouter with the proper basename so your routes align with /verticals-mockup
+    <Router basename="/verticals-mockup">
       <Layout>
         <Routes>
           <Route path="/" element={<Navigate to="/campaigns" />} />

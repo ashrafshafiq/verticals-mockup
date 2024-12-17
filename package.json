@@ -2,7 +2,7 @@
   "name": "verticals-mockup",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ashrafshafiq.github.io/verticals-mockup",
+  "homepage": "https://ashrafshafiq.github.io/verticals-mockup/",
   "dependencies": {
     "@emotion/react": "11.13.5",
     "@emotion/styled": "11.13.5",
